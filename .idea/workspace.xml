@@ -10,7 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1adcede-77d2-4e75-91bd-fe0b7c123b3f" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/packet_headers.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reciever.h" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,14 +20,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
+    <splitter split-orientation="horizontal" split-proportion="0.47171718">
       <split-first>
         <leaf>
           <file leaf-file-name="functions2.c" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/functions2.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1676">
-                  <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+                <state relative-caret-position="169">
+                  <caret line="72" column="75" lean-forward="true" selection-start-line="72" selection-end-line="72" selection-end-column="75" />
                 </state>
               </provider>
             </entry>
@@ -45,11 +45,20 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="packet_headers.h" pinned="false" current-in-tab="true">
+          <file leaf-file-name="packet_headers.h" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/packet_headers.h">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="315">
                   <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="reciever.h" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/reciever.h">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="465">
+                  <caret line="31" column="4" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="4" />
                 </state>
               </provider>
             </entry>
@@ -65,6 +74,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/packet_headers.h" />
+        <option value="$PROJECT_DIR$/reciever.h" />
       </list>
     </option>
   </component>
@@ -130,12 +140,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1531811486306</updated>
-      <workItem from="1531811487905" duration="406000" />
+      <workItem from="1531811487905" duration="1155000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="406000" />
+    <option name="totallyTimeSpent" value="1155000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="47" y="27" width="1319" height="741" extended-state="6" />
@@ -162,7 +172,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Run" order="5" />
       <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.24943139" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.24943139" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -184,17 +194,24 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/functions2.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1676">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/packet_headers.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/functions2.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="72" column="75" lean-forward="true" selection-start-line="72" selection-end-line="72" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reciever.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="4" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="4" />
         </state>
       </provider>
     </entry>
