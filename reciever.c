@@ -25,6 +25,8 @@
 #include <netinet/in.h>
 #include <poll.h>
 #include "myether.h"
+#include <time.h>
+#include <unistd.h>
 
 #define TOPORT 14950
 #define MYPORT 1043
@@ -231,16 +233,17 @@ char *recieveHashFromTS(char *fileName, int *size) {
 
 }
 
-int evaluatePublisherData(char* hashFromTS, struct publisher* publisherlist){
+int broadCastMD5(char* hashFromTS, struct publisher* publisherlist){
 
     int sfd;
     char ifname[MAX_IFNAMSIZ] = {0};
     int ret;
     int size;
-
     char *buffer;
     char *arg_data;
     char *arg_ifname;
+    char *myniccardm = "eth0";
+    char myipaddressm[22];
     struct sockaddr_in addrout;
 
     sfd = net_create_raw_socket(ifname, ETHER_TYPE, 0);
@@ -250,7 +253,7 @@ int evaluatePublisherData(char* hashFromTS, struct publisher* publisherlist){
     }
 
     struct special_hdr *hdr1;
-    arg_data = hashFromTS;
+    arg_data = hashFromTS + myipaddressm;
     size = strlen(arg_data) + 1 + sizeof(*hdr1);
 
     buffer = malloc(size);
@@ -285,10 +288,32 @@ int evaluatePublisherData(char* hashFromTS, struct publisher* publisherlist){
     closeSocket(sfd);
 
 
+}
 
+int recievePublishers(struct publisher* publisherList){
+    int sfd;
+    char ifname[MAX_IFNAMSIZ] = {0};
+    int ret;
+    struct publisher_to_reciever_packet_hdr *hdr1;
+    char* buffer;
+    char *arg_ifname;
+    struct sockaddr_in inaddr;
+    sfd =  createSocket(inaddr);
+    buffer = malloc(REC_BUFF_SIZE);
+    hdr1 = (struct publisher_to_reciever_packet_hdr*) buffer;
+    time_t endwait;
+    time_t start = time(NULL);
+    time_t seconds = 10;
+    endwait = start + seconds;
+    int i;
+    i = 0;
+    while(start < endwait) {
+        ret = recv(sfd, hdr1, REC_BUFF_SIZE, 0);
+        publisherList[i] = (struct publisher*) calloc(1, sizeof(struct publisher));
+        
 
-
-
+        start = time(NULL);
+    }
 
 
 }

@@ -16,6 +16,7 @@
     struct publisher_to_reciever_packet_hdr{
 
         uint16_t frindex;
+        uint32_t size;
         char packetType;
         char data[0];
 
