@@ -18,7 +18,7 @@
     int closeSocket(struct sockaddr_in sockaddr_in);
     int requestHash(char* fileName);
     char* recieveHashFromTS(char* fileName, int* size);
-    int evaluatePublisherData(int hashFromTS, struct publisher* publisherlist);
+    int evaluatePublisherData(char* hashFromTS, struct publisher* publisherlist);
     int partition(int size, int numberOfPublishers, struct publisher* publisherlist);
     int askForPartitions(struct publisher* publisherlist);
     int evaluateHash(char* hashFromTS, struct publisher* p);

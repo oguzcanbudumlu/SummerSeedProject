@@ -24,6 +24,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <poll.h>
+#include "myether.h"
 
 #define TOPORT 14950
 #define MYPORT 1043
@@ -31,6 +32,10 @@
 #define REC_BUFF_SIZE 1500
 #define MAX_IFNAMSIZ 32
 
+struct special_hdr{
+    struct reciever_to_publisher_packet_hdr hdrr;
+    struct ether_header eth;
+}__attribute__((packed));
 
 void my_ip(char *myniccard, char *myipaddr) {
     int fd;
@@ -226,4 +231,64 @@ char *recieveHashFromTS(char *fileName, int *size) {
 
 }
 
+int evaluatePublisherData(char* hashFromTS, struct publisher* publisherlist){
 
+    int sfd;
+    char ifname[MAX_IFNAMSIZ] = {0};
+    int ret;
+    int size;
+
+    char *buffer;
+    char *arg_data;
+    char *arg_ifname;
+    struct sockaddr_in addrout;
+
+    sfd = net_create_raw_socket(ifname, ETHER_TYPE, 0);
+    if (sfd == -1) {
+        fprintf(stderr, "failed to init socket\n");
+        exit(1);
+    }
+
+    struct special_hdr *hdr1;
+    arg_data = hashFromTS;
+    size = strlen(arg_data) + 1 + sizeof(*hdr1);
+
+    buffer = malloc(size);
+    if (!buffer){
+        fprintf(stderr, "memory allocation error!\n");
+        exit(1);
+    }
+    hdr1 = (struct special_hdr*)buffer;
+
+    net_get_iface_mac(ifname, (char *)hdr1->eth.ether_shost);
+    hdr1->eth.ether_type = htons(ETHER_TYPE);
+    memcpy(hdr1->eth.ether_dhost, ETH_ADD_BCAST, ETH_ALEN);
+    hdr1->hdrr.startingIndex = 0;
+    hdr1->hdrr.finishIndex = 0;
+    hdr1->hdrr.fragsize = 0;
+    hdr1->hdrr.isFinished = 'c';
+    strcpy(hdr1->hdrr.data, arg_data);
+
+    int y;
+    for(y = 0;y<100;y++){
+        ret = send(sfd, hdr1, size, 0);
+        if (ret != size) {
+            fprintf(stderr, "ERROR: send failed ret: %d, errno: %d\n", ret, errno);
+            exit(1);
+        }
+        fprintf(stderr, "%d bytes sent\n", ret);
+
+
+    }
+
+
+    closeSocket(sfd);
+
+
+
+
+
+
+
+
+}
