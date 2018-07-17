@@ -1,7 +1,7 @@
 //
 // Created by alican on 17.07.2018.
 //
-#include "publisher.h"
+
 #ifndef SUMMERSEEDPROJECT_RECIEVER_H
 #define SUMMERSEEDPROJECT_RECIEVER_H
 
@@ -16,7 +16,8 @@
 
     int createSocket(struct sockaddr_in sockaddr);
     int closeSocket(struct sockaddr_in sockaddr_in);
-    char* requestHash(char* fileName, int* size, file* trustedSourceFile);
+    int requestHash(char* fileName);
+    char* recieveHashFromTS(char* fileName, int* size);
     int evaluatePublisherData(int hashFromTS, struct publisher* publisherlist);
     int partition(int size, int numberOfPublishers, struct publisher* publisherlist);
     int askForPartitions(struct publisher* publisherlist);
@@ -29,6 +30,6 @@
     void write_to_file(int *sizes, char **fragments, char *fname, int fragsize);
     int addPublisher(struct publisher* publisherList);
     int removePublisher(struct publisher* publisherlist, struct publisher p);
-    
+    void my_ip( char *myniccard, char *myipaddr);
 
 #endif //SUMMERSEEDPROJECT_RECIEVER_H
