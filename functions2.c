@@ -135,10 +135,13 @@ struct Publisher{
 
     char* name;
     struct sockaddr_in;
-    
-    
+    uint16_t startingIndex;
+    uint16_t finishIndex;
+    char** md5Array;
+
+
 }
-struct sockaddr_in{}
+
 
 
 struct fileStatus{

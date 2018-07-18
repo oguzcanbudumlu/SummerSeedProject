@@ -21,9 +21,10 @@
     int broadCastMD5(char* hashFromTS, struct publisher* publisherlist);
     int recievePublishers(struct publisher* publisherList);
     int partition(int size, int numberOfPublishers, struct publisher* publisherlist);
-    int askForPartitions(struct publisher* publisherlist);
+    int askForPartitions(struct publisher* publisherlist,int numberOfPublishers);
     int evaluateHash(char* hashFromTS, struct publisher* p);
     void pause(struct publisher* publisherlist);
+    void recieveHashPacket(int numberOfPublishers,struct publisher* publisherlist);
     void sendBufferToPlayer();
     int downloadFinishSignal();
     int noPublishers();

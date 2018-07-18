@@ -11,7 +11,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d1adcede-77d2-4e75-91bd-fe0b7c123b3f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions2.c" beforeDir="false" afterPath="$PROJECT_DIR$/functions2.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reciever.c" beforeDir="false" afterPath="$PROJECT_DIR$/reciever.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reciever.h" beforeDir="false" afterPath="$PROJECT_DIR$/reciever.h" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -27,8 +29,8 @@
           <file leaf-file-name="functions2.c" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/functions2.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="210">
-                  <caret line="151" column="39" selection-start-line="151" selection-start-column="7" selection-end-line="151" selection-end-column="39" />
+                <state relative-caret-position="225">
+                  <caret line="143" selection-start-line="143" selection-end-line="143" />
                 </state>
               </provider>
             </entry>
@@ -36,8 +38,8 @@
           <file leaf-file-name="reciever.h" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/reciever.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="315">
-                  <caret line="21" column="57" selection-start-line="21" selection-start-column="57" selection-end-line="21" selection-end-column="57" />
+                <state relative-caret-position="405">
+                  <caret line="27" column="30" lean-forward="true" selection-start-line="26" selection-start-column="4" selection-end-line="27" selection-end-column="30" />
                 </state>
               </provider>
             </entry>
@@ -45,8 +47,8 @@
           <file leaf-file-name="packet_headers.h" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/packet_headers.h">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="450">
-                  <caret line="30" column="6" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
+                <state relative-caret-position="105">
+                  <caret line="7" column="43" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="43" />
                 </state>
               </provider>
             </entry>
@@ -67,16 +69,19 @@
           <file leaf-file-name="reciever.c" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/reciever.c">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="123">
-                  <caret line="292" column="55" lean-forward="true" selection-start-line="292" selection-start-column="55" selection-end-line="292" selection-end-column="55" />
+                <state relative-caret-position="-146">
+                  <caret line="95" column="32" selection-start-line="95" selection-start-column="32" selection-end-line="95" selection-end-column="32" />
                   <folding>
                     <element signature="e#703#826#1" />
-                    <element signature="e#829#1438#0" />
                     <element signature="e#1441#1953#0" />
                     <element signature="e#1955#2031#0" />
                     <element signature="e#2033#3940#0" />
                     <element signature="e#3942#5753#0" />
                     <element signature="e#5755#7131#0" />
+                    <element signature="e#7133#7861#0" />
+                    <element signature="e#8204#8273#0" />
+                    <element signature="e#8895#8956#0" />
+                    <element signature="e#10412#10475#0" />
                   </folding>
                 </state>
               </provider>
@@ -89,6 +94,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>fileStatus</find>
+      <find>22</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -97,8 +103,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/reciever.h" />
         <option value="$PROJECT_DIR$/packet_headers.h" />
+        <option value="$PROJECT_DIR$/reciever.h" />
         <option value="$PROJECT_DIR$/functions2.c" />
         <option value="$PROJECT_DIR$/reciever.c" />
       </list>
@@ -169,12 +175,12 @@
       <workItem from="1531811487905" duration="15072000" />
       <workItem from="1531846142482" duration="365000" />
       <workItem from="1531848662256" duration="241000" />
-      <workItem from="1531899335262" duration="645000" />
+      <workItem from="1531899335262" duration="9350000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16134000" />
+    <option name="totallyTimeSpent" value="25028000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="47" y="27" width="1319" height="741" extended-state="6" />
@@ -224,14 +230,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/reciever.c</url>
-          <line>36</line>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="26" />
+      <option name="time" value="34" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -262,12 +261,15 @@
           <caret line="312" column="26" selection-start-line="312" selection-start-column="26" selection-end-line="312" selection-end-column="26" />
           <folding>
             <element signature="e#703#826#1" />
-            <element signature="e#829#1438#0" />
             <element signature="e#1441#1953#0" />
             <element signature="e#1955#2031#0" />
             <element signature="e#2033#3940#0" />
             <element signature="e#3942#5753#0" />
             <element signature="e#5755#7131#0" />
+            <element signature="e#7133#7861#0" />
+            <element signature="e#8204#8273#0" />
+            <element signature="e#8895#8956#0" />
+            <element signature="e#10412#10475#0" />
           </folding>
         </state>
       </provider>
@@ -337,30 +339,33 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/reciever.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="57" selection-start-line="21" selection-start-column="57" selection-end-line="21" selection-end-column="57" />
+        <state relative-caret-position="405">
+          <caret line="27" column="30" lean-forward="true" selection-start-line="26" selection-start-column="4" selection-end-line="27" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/functions2.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="151" column="39" selection-start-line="151" selection-start-column="7" selection-end-line="151" selection-end-column="39" />
+        <state relative-caret-position="225">
+          <caret line="143" selection-start-line="143" selection-end-line="143" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/reciever.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="292" column="55" lean-forward="true" selection-start-line="292" selection-start-column="55" selection-end-line="292" selection-end-column="55" />
+        <state relative-caret-position="-146">
+          <caret line="95" column="32" selection-start-line="95" selection-start-column="32" selection-end-line="95" selection-end-column="32" />
           <folding>
             <element signature="e#703#826#1" />
-            <element signature="e#829#1438#0" />
             <element signature="e#1441#1953#0" />
             <element signature="e#1955#2031#0" />
             <element signature="e#2033#3940#0" />
             <element signature="e#3942#5753#0" />
             <element signature="e#5755#7131#0" />
+            <element signature="e#7133#7861#0" />
+            <element signature="e#8204#8273#0" />
+            <element signature="e#8895#8956#0" />
+            <element signature="e#10412#10475#0" />
           </folding>
         </state>
       </provider>

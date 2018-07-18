@@ -33,6 +33,7 @@
 #define LINE_SIZE 1024
 #define REC_BUFF_SIZE 1500
 #define MAX_IFNAMSIZ 32
+#define FRAG_SIZE 1500
 
 struct special_hdr{
     struct reciever_to_publisher_packet_hdr hdrr;
@@ -246,6 +247,11 @@ int broadCastMD5(char* hashFromTS, struct publisher* publisherlist){
     char myipaddressm[22];
     struct sockaddr_in addrout;
 
+    time_t endwait;
+    time_t start = time(NULL);
+    time_t seconds = 10;
+    endwait = start + seconds;
+
     sfd = net_create_raw_socket(ifname, ETHER_TYPE, 0);
     if (sfd == -1) {
         fprintf(stderr, "failed to init socket\n");
@@ -272,8 +278,8 @@ int broadCastMD5(char* hashFromTS, struct publisher* publisherlist){
     hdr1->hdrr.isFinished = 'c';
     strcpy(hdr1->hdrr.data, arg_data);
 
-    int y;
-    for(y = 0;y<100;y++){
+    endwait = start + seconds;
+    while(start < endwait){
         ret = send(sfd, hdr1, size, 0);
         if (ret != size) {
             fprintf(stderr, "ERROR: send failed ret: %d, errno: %d\n", ret, errno);
@@ -281,7 +287,7 @@ int broadCastMD5(char* hashFromTS, struct publisher* publisherlist){
         }
         fprintf(stderr, "%d bytes sent\n", ret);
 
-
+        start = time(NULL);
     }
 
 
@@ -290,7 +296,7 @@ int broadCastMD5(char* hashFromTS, struct publisher* publisherlist){
 
 }
 
-int recievePublishers(struct publisher* publisherList){
+int recievePublishers(struct publisher* publisherList,int* numberOfPublishers){
     int sfd;
     char ifname[MAX_IFNAMSIZ] = {0};
     int ret;
@@ -298,6 +304,7 @@ int recievePublishers(struct publisher* publisherList){
     char* buffer;
     char *arg_ifname;
     struct sockaddr_in inaddr;
+    numberOfPublishers = 0;
     sfd =  createSocket(inaddr);
     buffer = malloc(REC_BUFF_SIZE);
     hdr1 = (struct publisher_to_reciever_packet_hdr*) buffer;
@@ -309,11 +316,135 @@ int recievePublishers(struct publisher* publisherList){
     i = 0;
     while(start < endwait) {
         ret = recv(sfd, hdr1, REC_BUFF_SIZE, 0);
-        publisherList[i] = (struct publisher*) calloc(1, sizeof(struct publisher));
-        publisherList[i]->
 
+        if(hdr1->packetType =='r') {
+            publisherList[i] = (struct publisher *) calloc(1, sizeof(struct publisher));
+            memcpy(publisherList[i]->name, hdr1->data, 23);
+            createSocket(publisherList[i]->sockaddr_in);
+            i++;
+
+        }
         start = time(NULL);
     }
 
 
+
+    numberOfPublishers = i;
+
+
+
+
+}
+
+int partition(int size,int numberOfPublishers,  struct publisher* publisherList){
+
+    int sizePerPublisher;
+    sizePerPublisher = size/numberOfPublishers;
+    int remaining;
+    if(sizePerPublisher != size){
+        remaining = size - (sizePerPublisher*numberOfPublishers);
+    }
+
+    int i;
+    for(i = 0; i < numberOfPublishers; i++){
+        publisherList[i]->startingIndex = i*sizePerPublisher;
+        publisherList[i]->finishIndex = (i+1)*sizePerPublisher;
+        if(publisherList[i]->finishIndex > size/FRAG_SIZE){
+            publisherList[i]->finishIndex = size/FRAG_SIZE ;
+        }
+
+    }
+
+}
+
+int askForPartitions(int numberOfPublishers,struct publisher* publisherlist){
+
+    struct reciever_to_publisher_packet_hdr *hdrr;
+    int sockfd;
+    struct sockaddr_in their_addr;
+    int i;
+    struct hostent *he;
+
+    for(i = 0; i<numberOfPublishers;i++){
+        hdrr->startingIndex = publisherlist[i]->startingIndex;
+        hdrr->finishIndex = publisherlist[i]->finishIndex;
+        hdrr->isFinished = '0';
+        char *toSent = (char *) (hdrr);
+
+
+
+
+        if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
+            perror("Sender: Client-socket() error lol!");
+            exit(1);
+        }
+
+        localaddr.sin_family = AF_INET;
+        localaddr.sin_addr.s_addr = inet_addr(myipaddressm);
+        localaddr.sin_port = htons(MYPORT);
+        bind(sockfd, (struct sockaddr *) &localaddr, sizeof(localaddr));
+
+
+        their_addr.sin_family = AF_INET;
+        their_addr.sin_port = htons(TOPORT);
+        their_addr.sin_addr = *((struct in_addr *) he->h_addr);
+        memset(&(their_addr.sin_zero), '\0', 8);
+
+        if ((numbytes = sendto(sockfd, toSent,
+                               strlen(toSent),
+                               0,
+                               (struct sockaddr *) &their_addr,
+                               sizeof(struct sockaddr))) == -1) {
+            perror("Sender: Client-sendto() error lol!");
+            exit(1);
+        }
+        if (close(sockfd) != 0)
+            printf("Sender: Client-sockfd closing is failed!\n");
+
+
+
+
+    }
+
+}
+
+int evaluateHash(char* hashFromTS, struct publisher* p){
+
+
+}
+
+
+void recieveHashPacket(int numberOfPublishers,struct publisher* publisherlist){
+
+    int sfd;
+    char ifname[MAX_IFNAMSIZ] = {0};
+    int ret;
+    struct publisher_to_reciever_packet_hdr *hdr1;
+    char* buffer;
+    char *arg_ifname;
+    struct sockaddr_in inaddr;
+    numberOfPublishers = 0;
+    sfd =  createSocket(inaddr);
+    buffer = malloc(REC_BUFF_SIZE);
+    hdr1 = (struct publisher_to_reciever_packet_hdr*) buffer;
+    int i,y,z,t;
+    for(i = 0; i<numberOfPublishers;i++){
+        ret = recv(sfd, hdr1, REC_BUFF_SIZE, 0);
+        for(y=0;y<numberOfPublishers;y++){
+            char checker[22];
+            for(z=0;z<22;z++){
+                checker[i] = hdr1->data[i];
+            }
+
+            if(strcmp(checker,publisherlist[i]->name)){
+
+                for(z = 0; hdr1->data[0];z++){
+                    for(t=0;t<22;t++){
+                        publisherlist[z]->md5Array[z][t] = hdr1->data[1+z*22+t];
+                    }
+                }
+
+            }
+        }
+    }
 }
