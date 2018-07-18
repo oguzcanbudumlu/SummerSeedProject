@@ -22,7 +22,7 @@
     int recievePublishers(struct publisher* publisherList);
     int partition(int size, int numberOfPublishers, struct publisher* publisherlist);
     int askForPartitions(struct publisher* publisherlist,int numberOfPublishers);
-    int evaluateHash(char* hashFromTS, struct publisher* p);
+    int evaluateHash(char* hashFromTS, struct publisher* p,char** ch);
     void pause(struct publisher* publisherlist);
     void recieveHashPacket(int numberOfPublishers,struct publisher* publisherlist);
     void sendBufferToPlayer();
@@ -33,5 +33,6 @@
     int addPublisher(struct publisher* publisherList);
     int removePublisher(struct publisher* publisherlist, struct publisher p);
     void my_ip( char *myniccard, char *myipaddr);
+    void write_to_file2(struct publiser* p,char **generalArr,char **indexing,int *sizesOfPart,int *generalSizes,int fragSize);
 
 #endif //SUMMERSEEDPROJECT_RECIEVER_H

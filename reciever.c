@@ -486,10 +486,39 @@ int recievePackets(struct publisher* p, int fragmentCount,char* hashFromTS,char*
         arr[hdr.frindex-1] =hdr->size;
 
     }
-    if((i = evaluateHash(hashFromTS, p)) == 0){
-       write_to_file(arr,indexing,filename,fragmentCount);
+    if((i = evaluateHash(hashFromTS, p,indexing)) == 0){
+       write_to_file2(p,generalArr,indexing,arr,filename,generalSizes,fragmentCount);
    }
 
 
     free(hdr2);
+}
+
+int evaluateHash(char* hashFromTS, struct publisher* p){
+
+
+}
+
+void write_to_file(int *sizes, char **fragments, char *fname, int fragsize){
+
+    FILE* outp;
+    outp = fopen(fname,"w");
+    for (int i = 0; i < fragsize; ++i) {
+        fwrite(fragments[i],sizes[i],1,outp);
+        free(fragments[i]);
+    }
+    free(sizes);
+    free(fragments);
+    fclose(outp);
+
+}
+
+void write_to_file2(struct publiser* p,char **generalArr,char **indexing,int *sizesOfPart,int *generalSizes,int fragSize){
+    for(int i = 0; i<fragSize;i++){
+        memcpy(frags[i+p->startingIndex],indexing[i],sizesOfPart[i]);
+        memcpy(generalSizes[i+p->startingIndex],sizesOfPart[i], sizeof(int));
+    }
+    free(sizesOfPart);
+    free(indexing);
+
 }
