@@ -210,12 +210,12 @@ char *recieveHashFromTS(char *fileName, int *size) {
                 if (hdr1->data[0] == '1') {
                     int x;
 
-                    for (x = 0; x < 40; x++) {
+                    for (x = 0; x < 32; x++) {
                         toRet[x] = hdr1->data[x + 1];
 
                     }
-                    for (x = 0; x < (strlen(hdr1->data)) - 40; x++) {
-                        toSize[x] = hdr1->data[x + 41];
+                    for (x = 0; x < (strlen(hdr1->data)) - 32; x++) {
+                        toSize[x] = hdr1->data[x + 33];
                     }
                     size = (int) (toSize);
                     recieved = lines;
@@ -310,7 +310,7 @@ int recievePublishers(struct publisher* publisherList){
     while(start < endwait) {
         ret = recv(sfd, hdr1, REC_BUFF_SIZE, 0);
         publisherList[i] = (struct publisher*) calloc(1, sizeof(struct publisher));
-        
+        publisherList[i]->
 
         start = time(NULL);
     }

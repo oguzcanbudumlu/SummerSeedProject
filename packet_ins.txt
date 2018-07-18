@@ -1,0 +1,11 @@
+Hash requesting from reciever:
+reciever_to_publisher_packet_hdr -> 0-0-0-'0'-data => filename
+
+Hash send from trusted source: 
+(?header?) - data => [0] if 1 file exits, 0 if file is not exist sonraki 32 bit md5 
+
+
+md5 broadcast from reciever:
+special_header = reciever_to_publisher_packet_hdr + ether_header
+
+reciever_to_publisher_packet_hdr -> 0-0-0-'c'-data =>  md5(32bit) + myipaddres(23 bit)
