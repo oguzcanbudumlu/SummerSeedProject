@@ -448,3 +448,48 @@ void recieveHashPacket(int numberOfPublishers,struct publisher* publisherlist){
         }
     }
 }
+
+int recievePackets(struct publisher* p, int fragmentCount,char* hashFromTS,char* filename){
+
+    int fd;
+    struct sockaddr_in insock;
+    fd = createSocket(insock);
+    struct publisher_to_reciever_packet_hdr hdr;
+    if (fd == -1) {
+        fprintf(stderr, "failed to init socket\n");
+        exit(1);
+    }
+
+
+    int ret;
+    char* buffer;
+    buffer = malloc(RX_BUF_SIZE);
+    if (!buffer) {
+        fprintf(stderr, "memory allocation error!\n");
+        exit(1);
+    }
+
+    hdr = (struct publisher_to_reciever_packet_hdr*)buffer;
+    char **indexing;
+    int *arr;
+    arr = calloc(hdr->fragmentcount,sizeof(int));
+    indexing = calloc(hdr->fragmentcount,sizeof(char *));
+    int i;
+   for(i=0;i<fragmentCount;i++){
+        ret = recv(fd, hdr, RX_BUF_SIZE, 0);
+        if (ret <= 0) {
+            fprintf(stderr, "ERROR: recv failed ret: %d, errno: %d\n", ret, errno);
+            exit(1);
+        }
+        indexing[hdr.frindex - 1] = (char *) calloc(hdr->size,sizeof(char));
+        memcpy(indexing[hdr.frindex -1],hdr->data,hdr->size);
+        arr[hdr.frindex-1] =hdr->size;
+
+    }
+    if((i = evaluateHash(hashFromTS, p)) == 0){
+       write_to_file(arr,indexing,filename,fragmentCount);
+   }
+
+
+    free(hdr2);
+}
